@@ -3,23 +3,740 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex">
+  <meta name="description" content="오늘차이 - 예상하고, 돌아보며 알아가는 나의 하루">
+  <meta name="theme-color" content="#faf8f3">
   <title>오늘차이 | MEGI MINT</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/oneulchai.css">
+  <script src="../js/oneulchai.js" defer></script>
 </head>
-<body>
-  <header class="site-header">
+<body class="oneulchai-detail-page oc-v3">
+  <header class="site-header oc-header">
     <div class="shell header-inner">
-      <a class="brand" href="../index.html"><img src="../img/brand/mm-logo.png" alt="" class="brand-mark"><span>MEGI MINT</span></a>
+      <a class="brand" href="../index.html" aria-label="MEGI MINT 메인으로 이동">
+        <img src="../img/brand/mm-logo.png" alt="" class="brand-mark">
+        <span>MEGI MINT</span>
+      </a>
+      <a class="oc-home-link" href="../index.html">메인으로</a>
     </div>
   </header>
-  <main class="page-shell">
-    <section class="placeholder-card">
-      <p class="eyebrow">01 · ONEULCHAI</p>
-      <h1>오늘차이</h1>
-      <p>앱 상세 페이지는 다음 단계에서 구성합니다. 메인 홈페이지 디자인과 구조를 먼저 확정한 상태입니다.</p>
-      <a href="../index.html">← 메인으로 돌아가기</a>
+
+  <main class="oc-page">
+    <section class="oc-hero-v4 oc-section" id="intro">
+      <div class="oc-hero-v4-bg" aria-hidden="true">
+        <span class="oc-hero-orb oc-hero-orb--mint"></span>
+        <span class="oc-hero-orb oc-hero-orb--peach"></span>
+        <span class="oc-hero-orb oc-hero-orb--lavender"></span>
+      </div>
+      <div class="oc-shell oc-hero-v4-inner">
+        <div class="oc-hero-v4-main">
+          <div class="oc-hero-v4-copy oc-reveal">
+            <div class="oc-hero-v4-brandline">
+              <span class="oc-hero-v4-symbol-wrap"><img src="../img/apps/oneulchai/symbol.png" alt="오늘차이 심볼"></span>
+              <div><p class="oc-eyebrow">ONEULCHAI</p><span>오늘의 기록에서 내 흐름을 발견해요.</span></div>
+            </div>
+            <h1>오늘차이</h1>
+            <p class="oc-hero-v4-subtitle">예상하고, 돌아보며 알아가는 나의 하루</p>
+            <p class="oc-hero-v4-lead">오늘을 미리 예상하고, 하루 끝에 돌아보며,<br>기록이 쌓이면 나만의 패턴을 발견해요.</p>
+            <a class="oc-hero-v4-scroll" href="#day-flow">오늘차이 둘러보기 <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="oc-hero-v4-stage oc-reveal" aria-label="오늘차이 앱 화면 미리보기">
+            <div class="oc-hero-v4-shadow"></div>
+            <div class="oc-hero-v4-phone oc-hero-v4-phone--left" aria-hidden="true"><img src="../img/apps/oneulchai/detail/screen_predict.webp" alt=""></div>
+            <div class="oc-hero-v4-phone oc-hero-v4-phone--main"><img src="../img/apps/oneulchai/detail/screen_main.webp" alt="오늘차이 오늘 화면"></div>
+            <div class="oc-hero-v4-phone oc-hero-v4-phone--right" aria-hidden="true"><img src="../img/apps/oneulchai/detail/screen_review.webp" alt=""></div>
+            <span class="oc-hero-v4-float oc-hero-v4-float--one">예상 3 <b>→</b> 실제 5</span>
+            <span class="oc-hero-v4-float oc-hero-v4-float--two">오늘의 차이 <strong>+2</strong></span>
+          </div>
+        </div>
+        <div class="oc-hero-v4-menu oc-reveal" aria-label="오늘차이 주요 메뉴">
+          <a class="oc-hero-v4-menu-card oc-hero-v4-menu-card--today" href="#day-flow">
+            <span class="oc-hero-v4-menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></span>
+            <span class="oc-hero-v4-menu-copy"><strong>오늘</strong><small>예상하기 · 돌아보기</small></span><i aria-hidden="true">↗</i>
+          </a>
+          <a class="oc-hero-v4-menu-card oc-hero-v4-menu-card--history" href="#history">
+            <span class="oc-hero-v4-menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6C4.9 2 4.01 2.9 4.01 4L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></span>
+            <span class="oc-hero-v4-menu-copy"><strong>기록</strong><small>날짜별 기록과 오늘의 차이</small></span><i aria-hidden="true">↗</i>
+          </a>
+          <a class="oc-hero-v4-menu-card oc-hero-v4-menu-card--report" href="#report">
+            <span class="oc-hero-v4-menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zM16.2 13H19v6h-2.8v-6z"/></svg></span>
+            <span class="oc-hero-v4-menu-copy"><strong>리포트</strong><small>쌓인 기록에서 찾는 내 패턴</small></span><i aria-hidden="true">↗</i>
+          </a>
+          <a class="oc-hero-v4-menu-card oc-hero-v4-menu-card--discover" href="#discover">
+            <span class="oc-hero-v4-menu-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.3 16.9c.4-.7.7-1.5.7-2.4 0-2.5-2-4.5-4.5-4.5S11 12 11 14.5s2 4.5 4.5 4.5c.9 0 1.7-.3 2.4-.7l3.2 3.2 1.4-1.4-3.2-3.2zM15.5 17c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5zM12 20v2C6.48 22 2 17.52 2 12S6.48 2 12 2c4.84 0 8.87 3.44 9.8 8h-2.07c-.64-2.46-2.4-4.47-4.73-5.41V5c0 1.1-.9 2-2 2h-2v2c0 .55-.45 1-1 1H8v2h2v3H9l-4.79-4.79C4.08 10.79 4 11.38 4 12c0 4.41 3.59 8 8 8z"/></svg></span>
+            <span class="oc-hero-v4-menu-copy"><strong>발견</strong><small>오늘의 카드와 카드 도감</small></span><i aria-hidden="true">↗</i>
+          </a>
+        </div>
+      </div>
     </section>
+
+    <section class="oc-dayflow-v4 oc-section" id="day-flow">
+      <div class="oc-dayflow-bg" aria-hidden="true">
+        <span class="oc-dayflow-glow oc-dayflow-glow--mint"></span>
+        <span class="oc-dayflow-glow oc-dayflow-glow--peach"></span>
+      </div>
+      <div class="oc-shell">
+        <div class="oc-dayflow-heading oc-reveal">
+          <span class="oc-number">01</span>
+          <p class="oc-eyebrow">오늘 · 예상하기와 돌아보기</p>
+          <h2>아침에는 예상하고,<br>저녁에는 돌아봐요.</h2>
+          <p>같은 기준으로 하루의 앞과 뒤를 남기면, 예상과 실제 사이의 작은 차이가 자연스럽게 기록돼요.</p>
+        </div>
+
+        <div class="oc-dayflow-pair">
+          <article class="oc-dayflow-panel oc-dayflow-panel--morning oc-reveal">
+            <header class="oc-dayflow-panel-head">
+              <div class="oc-dayflow-icon"><img src="../img/apps/oneulchai/detail/ic_prediction.png" alt=""></div>
+              <div>
+                <p class="oc-eyebrow">예상하기</p>
+                <h3>오늘, 가볍게 시작하기</h3>
+                <p>오늘 하루와 에너지, 스트레스를 가볍게 골라 지금의 예상을 남겨요.</p>
+              </div>
+            </header>
+
+            <div class="oc-dayflow-demo oc-dayflow-demo--morning" data-demo="predict" data-side="predict" aria-label="예상하기 체험">
+              <div class="oc-score-card" data-metric="condition">
+                <div class="oc-score-head"><div><strong>오늘 하루</strong><span>오늘은 어떤 하루가 될 것 같나요?</span></div><b class="oc-score-value">3 / 5</b></div>
+                <div class="oc-score-row" role="group" aria-label="예상하기 오늘 하루 점수">
+                  <button type="button" class="oc-score" data-score="1"><img src="../img/apps/oneulchai/detail/ic_condition_1.png" alt=""><span>1</span></button>
+                  <button type="button" class="oc-score" data-score="2"><img src="../img/apps/oneulchai/detail/ic_condition_2.png" alt=""><span>2</span></button>
+                  <button type="button" class="oc-score is-active" data-score="3"><img src="../img/apps/oneulchai/detail/ic_condition_3.png" alt=""><span>3</span></button>
+                  <button type="button" class="oc-score" data-score="4"><img src="../img/apps/oneulchai/detail/ic_condition_4.png" alt=""><span>4</span></button>
+                  <button type="button" class="oc-score" data-score="5"><img src="../img/apps/oneulchai/detail/ic_condition_5.png" alt=""><span>5</span></button>
+                </div>
+              </div>
+
+              <div class="oc-score-card oc-score-card--compact" data-metric="energy">
+                <div class="oc-score-head"><div><strong>에너지</strong><span>오늘 움직일 힘은 어느 정도일까요?</span></div><b class="oc-score-value">2 / 5</b></div>
+                <div class="oc-icon-score-row" role="group" aria-label="예상하기 에너지 점수">
+                  <button type="button" data-score="1"><img src="../img/apps/oneulchai/detail/ic_energy_1.png" alt=""><span>1</span></button>
+                  <button type="button" class="is-active" data-score="2"><img src="../img/apps/oneulchai/detail/ic_energy_2.png" alt=""><span>2</span></button>
+                  <button type="button" data-score="3"><img src="../img/apps/oneulchai/detail/ic_energy_3.png" alt=""><span>3</span></button>
+                  <button type="button" data-score="4"><img src="../img/apps/oneulchai/detail/ic_energy_4.png" alt=""><span>4</span></button>
+                  <button type="button" data-score="5"><img src="../img/apps/oneulchai/detail/ic_energy_5.png" alt=""><span>5</span></button>
+                </div>
+              </div>
+
+              <div class="oc-score-card oc-score-card--compact" data-metric="stress">
+                <div class="oc-score-head"><div><strong>스트레스</strong><span>오늘 느낄 부담은 어느 정도일까요?</span></div><b class="oc-score-value">4 / 5</b></div>
+                <div class="oc-icon-score-row" role="group" aria-label="예상하기 스트레스 점수">
+                  <button type="button" data-score="1"><img src="../img/apps/oneulchai/detail/ic_stress_1.png" alt=""><span>1</span></button>
+                  <button type="button" data-score="2"><img src="../img/apps/oneulchai/detail/ic_stress_2.png" alt=""><span>2</span></button>
+                  <button type="button" data-score="3"><img src="../img/apps/oneulchai/detail/ic_stress_3.png" alt=""><span>3</span></button>
+                  <button type="button" class="is-active" data-score="4"><img src="../img/apps/oneulchai/detail/ic_stress_4.png" alt=""><span>4</span></button>
+                  <button type="button" data-score="5"><img src="../img/apps/oneulchai/detail/ic_stress_5.png" alt=""><span>5</span></button>
+                </div>
+              </div>
+
+              <div class="oc-demo-tags" aria-label="예상하기 선택 영역">
+                <button type="button" class="is-active">업무</button>
+                <button type="button">회의</button>
+                <button type="button" class="is-active">마음</button>
+                <button type="button">일정</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="oc-dayflow-panel oc-dayflow-panel--evening oc-reveal">
+            <header class="oc-dayflow-panel-head">
+              <div class="oc-dayflow-icon oc-dayflow-icon--peach"><img src="../img/apps/oneulchai/detail/ic_review.png" alt=""></div>
+              <div>
+                <p class="oc-eyebrow">돌아보기</p>
+                <h3>오늘, 차분히 돌아보기</h3>
+                <p>아침과 같은 기준으로 실제 하루를 남기고, 기억에 남는 항목과 한 줄 기록을 덧붙여요.</p>
+              </div>
+            </header>
+
+            <div class="oc-dayflow-demo oc-dayflow-demo--evening" data-demo="review" data-side="review" aria-label="돌아보기 체험">
+              <div class="oc-score-card" data-metric="condition">
+                <div class="oc-score-head"><div><strong>오늘 하루</strong><span>오늘은 어떤 하루였나요?</span></div><b class="oc-score-value oc-score-value--peach">4 / 5</b></div>
+                <div class="oc-score-row" role="group" aria-label="돌아보기 오늘 하루 점수">
+                  <button type="button" class="oc-score" data-score="1"><img src="../img/apps/oneulchai/detail/ic_condition_1.png" alt=""><span>1</span></button>
+                  <button type="button" class="oc-score" data-score="2"><img src="../img/apps/oneulchai/detail/ic_condition_2.png" alt=""><span>2</span></button>
+                  <button type="button" class="oc-score" data-score="3"><img src="../img/apps/oneulchai/detail/ic_condition_3.png" alt=""><span>3</span></button>
+                  <button type="button" class="oc-score is-active" data-score="4"><img src="../img/apps/oneulchai/detail/ic_condition_4.png" alt=""><span>4</span></button>
+                  <button type="button" class="oc-score" data-score="5"><img src="../img/apps/oneulchai/detail/ic_condition_5.png" alt=""><span>5</span></button>
+                </div>
+              </div>
+
+              <div class="oc-score-card oc-score-card--compact" data-metric="energy">
+                <div class="oc-score-head"><div><strong>에너지</strong><span>오늘 에너지는 어느 정도였나요?</span></div><b class="oc-score-value oc-score-value--peach">4 / 5</b></div>
+                <div class="oc-icon-score-row" role="group" aria-label="돌아보기 에너지 점수">
+                  <button type="button" data-score="1"><img src="../img/apps/oneulchai/detail/ic_energy_1.png" alt=""><span>1</span></button>
+                  <button type="button" data-score="2"><img src="../img/apps/oneulchai/detail/ic_energy_2.png" alt=""><span>2</span></button>
+                  <button type="button" data-score="3"><img src="../img/apps/oneulchai/detail/ic_energy_3.png" alt=""><span>3</span></button>
+                  <button type="button" class="is-active" data-score="4"><img src="../img/apps/oneulchai/detail/ic_energy_4.png" alt=""><span>4</span></button>
+                  <button type="button" data-score="5"><img src="../img/apps/oneulchai/detail/ic_energy_5.png" alt=""><span>5</span></button>
+                </div>
+              </div>
+
+              <div class="oc-score-card oc-score-card--compact" data-metric="stress">
+                <div class="oc-score-head"><div><strong>스트레스</strong><span>오늘 느낀 부담은 어느 정도였나요?</span></div><b class="oc-score-value oc-score-value--peach">2 / 5</b></div>
+                <div class="oc-icon-score-row" role="group" aria-label="돌아보기 스트레스 점수">
+                  <button type="button" data-score="1"><img src="../img/apps/oneulchai/detail/ic_stress_1.png" alt=""><span>1</span></button>
+                  <button type="button" class="is-active" data-score="2"><img src="../img/apps/oneulchai/detail/ic_stress_2.png" alt=""><span>2</span></button>
+                  <button type="button" data-score="3"><img src="../img/apps/oneulchai/detail/ic_stress_3.png" alt=""><span>3</span></button>
+                  <button type="button" data-score="4"><img src="../img/apps/oneulchai/detail/ic_stress_4.png" alt=""><span>4</span></button>
+                  <button type="button" data-score="5"><img src="../img/apps/oneulchai/detail/ic_stress_5.png" alt=""><span>5</span></button>
+                </div>
+              </div>
+
+              <div class="oc-memory-card">
+                <span class="oc-memory-label">기억에 남는 게 있나요?</span>
+                <div class="oc-review-tags">
+                  <button type="button" class="is-active">수면</button>
+                  <button type="button">스트레스</button>
+                  <button type="button" class="is-active">회의</button>
+                  <button type="button">피곤</button>
+                  <button type="button">헬스장</button>
+                </div>
+                <div class="oc-line-note">생각보다 괜찮은 하루였다.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="oc-dayflow-bridge oc-reveal" aria-label="예상과 실제 비교">
+          <div class="oc-dayflow-bridge-line"><i></i><span>예상과 실제를 같은 기준으로 비교해요</span><i></i></div>
+          <div class="oc-dayflow-compare">
+            <div class="oc-dayflow-compare-item" data-metric="condition">
+              <span>오늘 하루</span><strong><b class="oc-compare-predict">3</b><i>→</i><b class="oc-compare-review">4</b></strong>
+            </div>
+            <div class="oc-dayflow-compare-item" data-metric="energy">
+              <span>에너지</span><strong><b class="oc-compare-predict">2</b><i>→</i><b class="oc-compare-review">4</b></strong>
+            </div>
+            <div class="oc-dayflow-compare-item" data-metric="stress">
+              <span>스트레스</span><strong><b class="oc-compare-predict">4</b><i>→</i><b class="oc-compare-review">2</b></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="oc-history-v4 oc-section" id="history">
+      <div class="oc-history-v4-bg" aria-hidden="true"></div>
+      <div class="oc-shell">
+        <div class="oc-history-v4-heading oc-reveal">
+          <span class="oc-number">03</span>
+          <p class="oc-eyebrow">기록</p>
+          <h2>내가 남겨둔 기록들</h2>
+          <p>달력에서 흐름을 보고, 날짜를 열면 예상과 실제의 차이부터 한 줄 기록과 그날의 카드까지 다시 이어서 볼 수 있어요.</p>
+        </div>
+
+        <div class="oc-history-board oc-reveal">
+          <article class="oc-history-calendar-v4">
+            <div class="oc-history-calendar-top">
+              <div>
+                <span class="oc-history-label">월별 기록</span>
+                <h3 class="oc-history-month-title">현재 월</h3>
+                <span class="oc-history-current-date"></span>
+              </div>
+              <div class="oc-history-calendar-legend">
+                <span><i class="mint"></i>예상</span>
+                <span><i class="peach"></i>돌아보기</span>
+              </div>
+            </div>
+            <div class="oc-history-calendar-week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+            <div class="oc-history-calendar-grid" aria-label="현재 월 기록 예시"></div>
+            <div class="oc-history-calendar-summary">
+              <div><b class="oc-history-count-predict">0일</b><span>예상</span></div>
+              <div><b class="oc-history-count-review">0일</b><span>돌아보기</span></div>
+              <div><b class="oc-history-count-both">0일</b><span>둘 다</span></div>
+              <div class="oc-history-density"><span>기록 밀도</span><strong class="oc-history-density-value">0%</strong><i><b></b></i></div>
+            </div>
+          </article>
+
+          <div class="oc-history-detail-v4">
+            <article class="oc-history-summary-v4">
+              <div class="oc-history-summary-head">
+                <div>
+                  <span class="oc-history-label">선택한 하루</span>
+                  <h3 class="oc-history-date">선택 날짜</h3>
+                </div>
+                <span class="oc-history-state">예상 · 돌아보기</span>
+              </div>
+              <div class="oc-history-summary-body">
+                <div class="oc-history-venn-v4">
+                  <i class="mint"></i><i class="peach"></i>
+                  <div><span>예상 <b class="oc-history-exp">5</b></span><span>실제 <b class="oc-history-act">4</b></span></div>
+                </div>
+                <div class="oc-history-score-list">
+                  <div><span><img src="../img/apps/oneulchai/detail/ic_condition_4.png" alt="">오늘 하루</span><strong><b class="oc-history-condition-exp">5</b><i>→</i><b class="oc-history-condition-act">4</b></strong></div>
+                  <div><span><img src="../img/apps/oneulchai/detail/ic_energy_5.png" alt="">에너지</span><strong><b class="oc-history-energy-exp">3</b><i>→</i><b class="oc-history-energy-act">5</b></strong></div>
+                  <div><span><img src="../img/apps/oneulchai/detail/ic_stress_2.png" alt="">스트레스</span><strong><b class="oc-history-stress-exp">4</b><i>→</i><b class="oc-history-stress-act">2</b></strong></div>
+                </div>
+              </div>
+              <div class="oc-history-difference-v4">
+                <span>오늘의 차이</span>
+                <strong class="oc-history-delta">-1</strong>
+                <p class="oc-history-difference-copy">예상보다 조금 낮았지만, 에너지는 오히려 더 높았어요.</p>
+              </div>
+            </article>
+
+            <div class="oc-history-detail-grid">
+              <article class="oc-history-note-v4">
+                <span class="oc-history-label">한 줄 기록</span>
+                <blockquote class="oc-history-line">생각보다 괜찮았고, 오후에는 힘도 더 났다.</blockquote>
+                <div class="oc-history-tags-v4"><span>업무</span><span>마음</span><span>수면</span></div>
+              </article>
+
+              <article class="oc-history-message-v4">
+                <span class="oc-history-label">오늘의 한마디</span>
+                <p class="oc-history-message-text">처음 그려본 것보다 하루가 한결 탄력 있게 흘러갔네요.</p>
+                <div class="oc-history-message-art" aria-hidden="true"><i></i><i></i><i></i></div>
+              </article>
+
+              <article class="oc-history-card-v4">
+                <span class="oc-history-label">그날의 카드</span>
+                <div class="oc-history-card-wrap"><img class="oc-history-card-image" src="../img/apps/oneulchai/detail/tarot_wands_10.webp" alt="완드 10 정방향"></div>
+                <div><strong class="oc-history-card-title">완드 10</strong><span class="oc-history-card-direction">정방향</span></div>
+              </article>
+            </div>
+          </div>
+
+          <article class="oc-history-recent-v4">
+            <div class="oc-history-recent-head"><div><span class="oc-history-label">최근 기록</span><strong>하루씩 다시 열어보세요</strong></div><span>날짜를 누르면 위 기록이 바뀌어요.</span></div>
+            <div class="oc-history-strip-v4"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="oc-pattern-v4 oc-section" id="report">
+      <div class="oc-pattern-v4-bg" aria-hidden="true">
+        <span class="oc-pattern-orb oc-pattern-orb--mint"></span>
+        <span class="oc-pattern-orb oc-pattern-orb--lavender"></span>
+        <span class="oc-pattern-orb oc-pattern-orb--peach"></span>
+      </div>
+      <div class="oc-shell">
+        <div class="oc-pattern-v4-heading oc-reveal">
+          <span class="oc-number">04</span>
+          <p class="oc-eyebrow">리포트 · 내 패턴</p>
+          <h2>나만의 패턴을<br>발견한 시간</h2>
+          <p>하루하루의 기록이 쌓이면 예상 습관, 실제 흐름, 요일 리듬과 함께 반복되는 항목이 조금씩 보여요.</p>
+        </div>
+
+        <div class="oc-pattern-v4-board oc-reveal">
+          <div class="oc-pattern-v4-toolbar">
+            <div class="oc-period-tabs" role="group" aria-label="내 패턴 분석 기간 선택">
+              <button type="button" data-period="7">7일</button>
+              <button type="button" class="is-active" data-period="30">30일</button>
+              <button type="button" data-period="90">90일</button>
+              <button type="button" data-period="180">6개월</button>
+              <button type="button" data-period="365">1년</button>
+            </div>
+            <div class="oc-pattern-v4-range">
+              <strong class="oc-period-range">기간 계산 중</strong>
+              <span><b class="oc-period-predict">24일</b> 예상 · <b class="oc-period-review">21일</b> 돌아보기 · <b class="oc-period-compare">18일</b> 비교</span>
+            </div>
+          </div>
+
+          <div class="oc-pattern-v4-grid">
+            <article class="oc-pattern-card oc-pattern-card--overview">
+              <div class="oc-pattern-card-head">
+                <div>
+                  <span>이번 기간의 흐름</span>
+                  <h3>비슷했던 날과 달랐던 날을 같이 봐요</h3>
+                </div>
+                <span class="oc-pattern-period-badge">30일</span>
+              </div>
+              <div class="oc-flow-orbit" aria-label="예상보다 높음, 비슷함, 예상보다 낮음">
+                <div class="oc-flow-ring">
+                  <i class="oc-flow-ring-a"></i>
+                  <i class="oc-flow-ring-b"></i>
+                  <span>비교<br><b class="oc-period-compare-short">18일</b></span>
+                </div>
+                <div class="oc-flow-stats">
+                  <div><i class="mint"></i><span>예상보다 높음</span><strong class="oc-flow-up">6일</strong></div>
+                  <div><i class="lavender"></i><span>비슷함</span><strong class="oc-flow-same">9일</strong></div>
+                  <div><i class="peach"></i><span>예상보다 낮음</span><strong class="oc-flow-down">3일</strong></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--surprise">
+              <span class="oc-pattern-kicker">가장 예상 밖이었던 날</span>
+              <div class="oc-surprise-date"><strong class="oc-surprise-date-text">10월 2일</strong><b>+2</b></div>
+              <p>오늘 하루 점수에서 예상과 실제 차이가 가장 컸던 날이에요.</p>
+              <div class="oc-surprise-score"><span>예상 <b>3</b></span><i>→</i><span>실제 <b>5</b></span></div>
+              <div class="oc-surprise-note">
+                <div class="oc-surprise-note-head">
+                  <span class="oc-surprise-note-icon">✦</span>
+                  <b>작은 발견</b>
+                </div>
+                <p>생각보다 괜찮았던 날은,<br>내가 나를 조금 덜 걱정해도 된다는 기록이 되기도 해요.</p>
+              </div>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--flow">
+              <div class="oc-pattern-card-head oc-pattern-card-head--flow">
+                <div>
+                  <span>예상과 실제의 흐름</span>
+                  <h3>두 선을 겹쳐 보면 차이가 보여요</h3>
+                </div>
+                <div class="oc-metric-tabs" role="group" aria-label="흐름 지표 선택">
+                  <button type="button" class="is-active" data-metric="condition">오늘 하루</button>
+                  <button type="button" data-metric="energy">에너지</button>
+                  <button type="button" data-metric="stress">스트레스</button>
+                </div>
+              </div>
+              <div class="oc-pattern-chart">
+                <div class="oc-pattern-y-axis"><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span></div>
+                <svg viewBox="0 0 680 245" aria-label="예상과 실제 흐름">
+                  <g class="oc-pattern-chart-grid">
+                    <line x1="20" y1="25" x2="660" y2="25"></line>
+                    <line x1="20" y1="75" x2="660" y2="75"></line>
+                    <line x1="20" y1="125" x2="660" y2="125"></line>
+                    <line x1="20" y1="175" x2="660" y2="175"></line>
+                    <line x1="20" y1="225" x2="660" y2="225"></line>
+                  </g>
+                  <polyline class="oc-pattern-line oc-pattern-line--predict" points=""></polyline>
+                  <polyline class="oc-pattern-line oc-pattern-line--actual" points=""></polyline>
+                  <g class="oc-pattern-chart-points"></g>
+                </svg>
+                <div class="oc-pattern-chart-tooltip"></div>
+              </div>
+              <div class="oc-pattern-chart-foot">
+                <div><span><i class="mint"></i>예상</span><span><i class="peach"></i>실제</span></div>
+                <strong class="oc-chart-summary">마지막 기록 · 예상 3 → 실제 5</strong>
+              </div>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--density">
+              <span class="oc-pattern-kicker">기록의 밀도</span>
+              <div class="oc-density-title"><strong class="oc-density-rate">90%</strong><span>선택 기간에서<br>실제 기록이 있는 비율</span></div>
+              <div class="oc-density-v4" aria-label="기록 밀도"></div>
+              <div class="oc-density-foot"><b class="oc-density-days">27일 기록</b><span>꾸준함이 먼저 보여요</span></div>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--habit">
+              <div class="oc-pattern-card-head">
+                <div>
+                  <span>나의 예상 습관</span>
+                  <h3>어떤 예상이 실제와 자주 만났을까요?</h3>
+                </div>
+              </div>
+              <div class="oc-habit-matrix">
+                <div class="oc-habit-axis oc-habit-axis--top">실제 →</div>
+                <div class="oc-habit-axis oc-habit-axis--left">예상<br>↓</div>
+                <div class="oc-habit-cols"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                <div class="oc-habit-rows"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                <div class="oc-habit-cells"></div>
+              </div>
+              <p class="oc-habit-copy"><b>예상 5 → 실제 5</b> 조합이 가장 자주 나타났어요.</p>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--difference">
+              <span class="oc-pattern-kicker">예상과 실제의 차이</span>
+              <h3>차이의 방향도 함께 봐요</h3>
+              <div class="oc-difference-bars">
+                <div><span>예상보다 높음</span><i><b class="oc-diff-up-bar"></b></i><strong class="oc-diff-up">33%</strong></div>
+                <div><span>비슷함</span><i><b class="oc-diff-same-bar"></b></i><strong class="oc-diff-same">50%</strong></div>
+                <div><span>예상보다 낮음</span><i><b class="oc-diff-down-bar"></b></i><strong class="oc-diff-down">17%</strong></div>
+              </div>
+              <p>좋고 나쁨이 아니라 예상과 실제가 어느 방향으로 달랐는지 보여줘요.</p>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--week">
+              <div class="oc-pattern-card-head">
+                <div>
+                  <span>요일 리듬</span>
+                  <h3>같은 요일의 실제 기록 평균</h3>
+                </div>
+              </div>
+              <div class="oc-week-v4">
+                <div data-day="월"><b>3.4</b><i style="--h:72%"></i><span>월</span></div>
+                <div data-day="화"><b>3.1</b><i style="--h:64%"></i><span>화</span></div>
+                <div data-day="수"><b>3.6</b><i style="--h:78%"></i><span>수</span></div>
+                <div data-day="목"><b>3.3</b><i style="--h:69%"></i><span>목</span></div>
+                <div data-day="금"><b>3.8</b><i style="--h:84%"></i><span>금</span></div>
+                <div data-day="토"><b>4.0</b><i style="--h:90%"></i><span>토</span></div>
+                <div data-day="일"><b>3.2</b><i style="--h:67%"></i><span>일</span></div>
+              </div>
+              <p><b>토요일</b>에 오늘 하루 점수가 상대적으로 높게 나타났어요.</p>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--together">
+              <span class="oc-pattern-kicker">함께 나타난 패턴</span>
+              <div class="oc-together-chip">헬스장 <b>기록 충분</b></div>
+              <h3>헬스장을 기록한 날</h3>
+              <p>스트레스가 전체 평균보다 낮게 나타난 경우가 많았어요.</p>
+              <div class="oc-together-score"><strong>83%</strong><span>72일 중 60일</span></div>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--frequent">
+              <div class="oc-pattern-card-head">
+                <div><span>자주 기록한 것</span><h3>반복해서 선택한 영역과 세부항목</h3></div>
+              </div>
+              <div class="oc-frequent-v4">
+                <div><small>영역</small><span>일/공부 <b>234일</b></span><span>몸 <b>187일</b></span><span>마음 <b>147일</b></span></div>
+                <div><small>세부항목</small><span>스트레스 <b>147회</b></span><span>수면 <b>127회</b></span><span>회의 <b>126회</b></span></div>
+              </div>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--words">
+              <span class="oc-pattern-kicker">자주 나온 말</span>
+              <h3>한 줄 기록에서 반복된 표현</h3>
+              <div class="oc-word-cloud-v4">
+                <button type="button" class="is-active"><b>집</b><span>5회</span></button>
+                <button type="button"><b>마감</b><span>3회</span></button>
+                <button type="button"><b>산책</b><span>3회</span></button>
+                <button type="button"><b>회의</b><span>2회</span></button>
+              </div>
+              <p class="oc-word-copy">단어를 눌러 반복된 표현을 가볍게 살펴볼 수 있어요.</p>
+            </article>
+
+            <article class="oc-pattern-card oc-pattern-card--trace">
+              <div class="oc-pattern-trace-copy">
+                <span class="oc-pattern-kicker">나의 카드 흔적</span>
+                <h3>기록과 함께 쌓인 작은 발견</h3>
+                <p>오늘의 카드도 기록 속에서 함께 쌓여요. 어떤 카드를 자주 만났는지 한눈에 볼 수 있어요.</p>
+                <div class="oc-trace-numbers"><span><strong>185</strong>카드 만난 횟수</span><span><strong>61</strong>서로 다른 카드</span></div>
+              </div>
+              <div class="oc-trace-v4-cards">
+                <img src="../img/apps/oneulchai/detail/tarot_major_11_justice.webp" alt="정의">
+                <img src="../img/apps/oneulchai/detail/tarot_cups_09.webp" alt="컵 9">
+                <img src="../img/apps/oneulchai/detail/tarot_wands_10.webp" alt="완드 10">
+                <img src="../img/apps/oneulchai/detail/tarot_swords_06.webp" alt="소드 6">
+                <img src="../img/apps/oneulchai/detail/tarot_pentacles_03.webp" alt="펜타클 3">
+              </div>
+              <div class="oc-trace-v4-stats">
+                <span><b>메이저 아르카나</b><i><em style="--p:52%"></em></i><strong>52%</strong></span>
+                <span><b>완드</b><i><em style="--p:31%"></em></i><strong>31%</strong></span>
+                <span><b>컵</b><i><em style="--p:24%"></em></i><strong>24%</strong></span>
+                <span><b>소드</b><i><em style="--p:27%"></em></i><strong>27%</strong></span>
+                <span><b>펜타클</b><i><em style="--p:21%"></em></i><strong>21%</strong></span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="oc-discovery-v4 oc-section" id="discover">
+      <div class="oc-discovery-v4-bg" aria-hidden="true">
+        <span class="oc-discovery-orb oc-discovery-orb--peach"></span>
+        <span class="oc-discovery-orb oc-discovery-orb--lavender"></span>
+        <span class="oc-discovery-orb oc-discovery-orb--mint"></span>
+      </div>
+      <div class="oc-shell">
+        <div class="oc-scene-heading oc-discovery-v4-heading oc-reveal">
+          <span class="oc-number">05</span>
+          <p class="oc-eyebrow">발견 · 오늘의 카드</p>
+          <h2>하루 한 장,<br>나만의 도감을 채워가요.</h2>
+          <p>오늘의 카드를 만나고, 다시 만난 카드에는 새로운 해석이 쌓여요. 정방향과 역방향도 서로 다른 만남으로 기록합니다.</p>
+        </div>
+
+        <div class="oc-discovery-v4-stage oc-reveal">
+          <div class="oc-discovery-v4-story">
+            <span class="oc-discovery-pill">오늘의 작은 발견</span>
+            <h3>카드 뒷면에서 시작하는<br>오늘의 한 장</h3>
+            <p>세 장 중 마음이 가는 카드를 눌러보세요. 카드를 뒤집으면 오늘 만난 카드와 작은 메시지가 나타나요.</p>
+
+            <div class="oc-discovery-v4-deck" aria-label="오늘의 카드 뽑기">
+              <button type="button" class="oc-draw-card oc-draw-card--left" data-draw-slot="0" aria-label="첫 번째 카드 선택">
+                <img src="../img/apps/oneulchai/detail/tarot_back.webp" alt="첫 번째 오늘차이 카드">
+              </button>
+              <button type="button" class="oc-draw-card oc-draw-card--center" data-draw-slot="1" aria-label="두 번째 카드 선택">
+                <img src="../img/apps/oneulchai/detail/tarot_back.webp" alt="두 번째 오늘차이 카드">
+              </button>
+              <button type="button" class="oc-draw-card oc-draw-card--right" data-draw-slot="2" aria-label="세 번째 카드 선택">
+                <img src="../img/apps/oneulchai/detail/tarot_back.webp" alt="세 번째 오늘차이 카드">
+              </button>
+              <span class="oc-draw-caption">마음이 가는 카드를 눌러보세요</span>
+            </div>
+
+            <div class="oc-discovery-v4-actions">
+              <button type="button" class="oc-draw-button">오늘의 카드 뽑아보기 <span>✦</span></button>
+              <span>하루 한 장 · 만난 카드는 도감에 기록</span>
+            </div>
+          </div>
+
+          <div class="oc-discovery-phone-wrap" aria-label="오늘차이 발견 화면 예시">
+            <div class="oc-discovery-phone-glow"></div>
+            <div class="oc-discovery-phone">
+              <div class="oc-phone-status">
+                <span>9:48</span>
+                <i></i>
+                <div><b>▮▮▮</b><b>⌁</b><b>▰</b></div>
+              </div>
+              <div class="oc-phone-discover-head">
+                <div>
+                  <strong>발견</strong>
+                  <span>오늘의 마음을 가볍게 들여다봐요.</span>
+                </div>
+                <button type="button" aria-label="카드 기록 보기">↗</button>
+              </div>
+
+              <div class="oc-phone-today-card">
+                <div class="oc-phone-card-label">
+                  <div><strong>오늘의 카드</strong><span>하루에 한 장, 오늘을 위한 작은 발견</span></div>
+                  <em>오늘 만남</em>
+                </div>
+                <div class="oc-phone-card-art">
+                  <img class="oc-phone-card-image" src="../img/apps/oneulchai/detail/tarot_major_17_star.webp" alt="별 정방향">
+                </div>
+                <h4 class="oc-phone-card-title">별</h4>
+                <span class="oc-phone-card-direction">정방향</span>
+                <div class="oc-phone-keywords">
+                  <span>희망</span><span>회복</span><span>여유</span>
+                </div>
+                <div class="oc-phone-message">
+                  <small>🌱 오늘의 메시지</small>
+                  <p>멀리 보려 애쓰기보다 지금 마음이 편해지는 작은 방향부터 바라보세요.</p>
+                </div>
+              </div>
+
+              <div class="oc-phone-archive">
+                <div class="oc-phone-archive-head">
+                  <div>
+                    <strong>나의 카드 도감</strong>
+                    <span>한 장씩 채워가는 작은 컬렉션</span>
+                  </div>
+                  <b>50 / 78</b>
+                </div>
+                <div class="oc-phone-archive-progress"><i><b></b></i><span>64%</span></div>
+                <div class="oc-phone-recent-label"><strong>최근 만난 카드</strong><span>실제로 만난 카드들이 남아요.</span></div>
+                <div class="oc-phone-recent">
+                  <figure><img src="../img/apps/oneulchai/detail/tarot_major_17_star.webp" alt="별"><figcaption>별</figcaption></figure>
+                  <figure><img src="../img/apps/oneulchai/detail/tarot_major_02_high_priestess.webp" alt="여사제"><figcaption>여사제</figcaption></figure>
+                  <figure><img src="../img/apps/oneulchai/detail/tarot_major_19_sun.webp" alt="태양"><figcaption>태양</figcaption></figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="oc-discovery-archive-v5 oc-reveal">
+          <div class="oc-archive-v5-head">
+            <div class="oc-archive-v5-title">
+              <div class="oc-archive-v5-icon">
+                <img src="../img/apps/oneulchai/detail/ic_card_archive.png" alt="">
+              </div>
+              <div>
+                <small>나의 카드 도감</small>
+                <h3>만난 카드가 하나씩 쌓여가요</h3>
+                <p>계열별로 얼마나 발견했는지, 아직 만나지 못한 카드는 얼마나 남았는지 한눈에 살펴볼 수 있어요.</p>
+              </div>
+            </div>
+
+            <div class="oc-archive-v5-total">
+              <div>
+                <strong>50 <span>/ 78</span></strong>
+                <small>실제로 만난 카드</small>
+              </div>
+              <div class="oc-archive-v5-total-progress">
+                <i><b style="--p:64.1%"></b></i>
+                <span>64%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="oc-archive-v5-tabs" role="group" aria-label="카드 상태">
+            <button type="button" class="is-active" data-archive-filter="all">전체</button>
+            <button type="button" data-archive-filter="found">발견</button>
+            <button type="button" data-archive-filter="missing">미발견</button>
+          </div>
+
+          <div class="oc-archive-v5-body">
+            <div class="oc-archive-v5-suits">
+              <div class="oc-archive-v5-suits-head">
+                <div>
+                  <strong>계열별 수집</strong>
+                  <span>계열마다 만난 카드와 남은 카드를 함께 보여줘요.</span>
+                </div>
+                <small class="oc-archive-v5-filter-label">전체 카드</small>
+              </div>
+
+              <div class="oc-archive-v5-suit-grid">
+                <article class="oc-suit-card" data-found="17" data-total="22">
+                  <div class="oc-suit-card-top">
+                    <span class="oc-suit-icon oc-suit-icon--major"><img src="../img/apps/oneulchai/detail/ic_major_arcana.png" alt=""></span>
+                    <div><strong>메이저 아르카나</strong><small>큰 흐름을 담은 22장의 카드</small></div>
+                  </div>
+                  <div class="oc-suit-card-count"><b class="oc-suit-current">17</b><span>/ 22</span></div>
+                  <div class="oc-suit-card-progress"><i><b style="--p:77.3%"></b></i><span class="oc-suit-percent">77%</span></div>
+                </article>
+
+                <article class="oc-suit-card" data-found="11" data-total="14">
+                  <div class="oc-suit-card-top">
+                    <span class="oc-suit-icon oc-suit-icon--wands"><img src="../img/apps/oneulchai/detail/ic_wands.png" alt=""></span>
+                    <div><strong>완드</strong><small>움직임과 의지를 담은 카드</small></div>
+                  </div>
+                  <div class="oc-suit-card-count"><b class="oc-suit-current">11</b><span>/ 14</span></div>
+                  <div class="oc-suit-card-progress"><i><b style="--p:78.6%"></b></i><span class="oc-suit-percent">79%</span></div>
+                </article>
+
+                <article class="oc-suit-card" data-found="6" data-total="14">
+                  <div class="oc-suit-card-top">
+                    <span class="oc-suit-icon oc-suit-icon--cups"><img src="../img/apps/oneulchai/detail/ic_cups.png" alt=""></span>
+                    <div><strong>컵</strong><small>감정과 관계를 담은 카드</small></div>
+                  </div>
+                  <div class="oc-suit-card-count"><b class="oc-suit-current">6</b><span>/ 14</span></div>
+                  <div class="oc-suit-card-progress"><i><b style="--p:42.9%"></b></i><span class="oc-suit-percent">43%</span></div>
+                </article>
+
+                <article class="oc-suit-card" data-found="10" data-total="14">
+                  <div class="oc-suit-card-top">
+                    <span class="oc-suit-icon oc-suit-icon--swords"><img src="../img/apps/oneulchai/detail/ic_swords.png" alt=""></span>
+                    <div><strong>소드</strong><small>생각과 판단을 담은 카드</small></div>
+                  </div>
+                  <div class="oc-suit-card-count"><b class="oc-suit-current">10</b><span>/ 14</span></div>
+                  <div class="oc-suit-card-progress"><i><b style="--p:71.4%"></b></i><span class="oc-suit-percent">71%</span></div>
+                </article>
+
+                <article class="oc-suit-card" data-found="6" data-total="14">
+                  <div class="oc-suit-card-top">
+                    <span class="oc-suit-icon oc-suit-icon--pentacles"><img src="../img/apps/oneulchai/detail/ic_pentacles.png" alt=""></span>
+                    <div><strong>펜타클</strong><small>현실과 기반을 담은 카드</small></div>
+                  </div>
+                  <div class="oc-suit-card-count"><b class="oc-suit-current">6</b><span>/ 14</span></div>
+                  <div class="oc-suit-card-progress"><i><b style="--p:42.9%"></b></i><span class="oc-suit-percent">43%</span></div>
+                </article>
+              </div>
+            </div>
+
+            <aside class="oc-archive-v5-recent">
+              <div class="oc-archive-v5-recent-head">
+                <span>최근 발견</span>
+                <strong>도감에 새로 들어온 카드</strong>
+                <p>오늘 만난 카드가 도감에 차곡차곡 남아요.</p>
+              </div>
+
+              <div class="oc-archive-v5-card-fan">
+                <figure class="oc-archive-v5-card oc-archive-v5-card--left">
+                  <img src="../img/apps/oneulchai/detail/tarot_major_02_high_priestess.webp" alt="여사제">
+                  <figcaption>여사제</figcaption>
+                </figure>
+                <figure class="oc-archive-v5-card oc-archive-v5-card--center">
+                  <img src="../img/apps/oneulchai/detail/tarot_major_17_star.webp" alt="별">
+                  <figcaption>별</figcaption>
+                </figure>
+                <figure class="oc-archive-v5-card oc-archive-v5-card--right">
+                  <img src="../img/apps/oneulchai/detail/tarot_major_19_sun.webp" alt="태양">
+                  <figcaption>태양</figcaption>
+                </figure>
+              </div>
+
+              <div class="oc-archive-v5-note">
+                <span>✦</span>
+                <p><b>50번째 발견</b><br>같은 카드도 다시 만나며 다른 해석을 채워갈 수 있어요.</p>
+              </div>
+
+              <button type="button" class="oc-archive-v5-link">카드 도감 둘러보기 <span>→</span></button>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="oc-reminder oc-section"><div class="oc-shell oc-reminder-grid"><div class="oc-reminder-copy oc-reveal"><span class="oc-number">06</span><img class="oc-reminder-icon" src="../img/apps/oneulchai/detail/ic_notification.png" alt=""><p class="oc-eyebrow">REMINDER</p><h2>원하는 시간에,<br>가볍게 알려드릴게요.</h2><p>예상하기와 돌아보기 알림은 각각 켜고 끌 수 있고, 시간도 언제든 바꿀 수 있어요.</p><div class="oc-time-pills"><span data-reminder-pill="predict"><strong>예상하기</strong> 09:00</span><span data-reminder-pill="review"><strong>돌아보기</strong> 21:30</span></div></div><div class="oc-reminder-demo oc-reveal"><div class="oc-reminder-sheet"><div class="oc-sheet-handle"></div><h3>알림 설정</h3><p>아직 기록이 없다면 설정한 시간에 알려드려요.</p><div class="oc-reminder-row"><img src="../img/apps/oneulchai/detail/ic_prediction.png" alt=""><div><strong>예상하기</strong><span>아직 예상이 없다면 알려드려요.</span></div><button type="button" class="oc-toggle is-on" data-reminder="predict"><i></i></button></div><div class="oc-reminder-time"><span>알림 시간</span><button type="button" class="oc-time-button">09:00</button></div><div class="oc-time-picker"><span>08</span><strong>09</strong><b>:</b><strong>00</strong><span>05</span></div><div class="oc-reminder-row oc-reminder-row--review"><img src="../img/apps/oneulchai/detail/ic_review.png" alt=""><div><strong>돌아보기</strong><span>아직 돌아보기가 없다면 알려드려요.</span></div><button type="button" class="oc-toggle is-on" data-reminder="review"><i></i></button></div><div class="oc-reminder-time"><span>알림 시간</span><button type="button" class="oc-time-button">21:30</button></div></div></div></div></section>
+
+    <section class="oc-privacy oc-section"><div class="oc-shell"><div class="oc-privacy-heading oc-reveal"><p class="oc-eyebrow">PRIVACY</p><h2>기록은 가까이에,<br>처리는 투명하게.</h2><p>생활 기록은 기본적으로 기기 안에 저장하고 분석합니다. 외부 서비스가 필요한 부분은 필요한 범위에서만 처리합니다.</p></div><div class="oc-trust-grid"><article class="oc-trust-card oc-tone-mint oc-reveal"><span>생활 기록</span><strong>기기 안에 저장</strong><p>예상·돌아보기·카드 기록은 기본적으로 사용자 기기에 남습니다.</p></article><article class="oc-trust-card oc-tone-peach oc-reveal"><span>한글 분석</span><strong>기기 안에서 처리</strong><p>한 줄 기록의 분석과 패턴 계산도 기기 안에서 수행됩니다.</p></article><article class="oc-trust-card oc-tone-lavender oc-reveal"><span>광고 · 결제</span><strong>필요한 범위만</strong><p>광고와 구매에 필요한 정보만 Google 서비스에서 별도로 처리됩니다.</p></article></div><a class="oc-policy-link oc-reveal" href="../privacy/oneulchai.html">개인정보처리방침 자세히 보기 <span>↗</span></a></div></section>
+
+    <section class="oc-closing oc-section"><div class="oc-shell oc-closing-inner oc-reveal"><div class="oc-closing-app"><div class="oc-app-tile"><img src="../img/apps/oneulchai/symbol.png" alt="오늘차이"></div></div><div><p class="oc-eyebrow">ONEULCHAI</p><h2>예상하고, 돌아보며 알아가는 나의 하루</h2><p>오늘의 작은 기록이 쌓여 나만의 흐름이 됩니다.</p></div><a href="../index.html" class="oc-back-link">MEGI MINT로 돌아가기 <span>↗</span></a></div></section>
   </main>
+
+  <footer class="site-footer oc-footer"><div class="shell footer-inner"><div class="footer-brand"><a class="brand brand-small" href="../index.html"><img src="../img/brand/mm-logo.png" alt="" class="brand-mark"><span>MEGI MINT</span></a><p>Ideas into apps.</p></div><div class="footer-contact"><p class="footer-label">ONEULCHAI</p><a class="footer-email" href="../privacy/oneulchai.html">개인정보처리방침</a><p class="copyright">© 2026 MEGI MINT</p></div></div></footer>
 </body>
 </html>
