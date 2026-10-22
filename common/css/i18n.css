@@ -1,0 +1,44 @@
+/* Site-wide language selector. Shared by the home, detail and policy headers. */
+.mm-header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 20px; min-width: 0; }
+.mm-language-control { position: relative; display: inline-flex; flex: 0 0 auto; align-items: center; }
+.mm-language-select {
+  appearance: auto;
+  -webkit-appearance: auto;
+  width: 113px;
+  height: 36px;
+  margin: 0;
+  padding: 0 6px;
+  border: 1px solid rgba(21, 34, 53, .18);
+  border-radius: 9px;
+  background: rgba(255, 253, 249, .9);
+  color: #263649;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.mm-language-select:hover { border-color: rgba(21, 34, 53, .35); }
+.mm-language-select:focus-visible { outline: 2px solid #5cbfaf; outline-offset: 2px; }
+.mm-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+/* Keep the language selector at the same horizontal position while menu words change length. */
+@media (min-width: 701px) {
+  .main-nav { width: 370px; justify-content: space-between; }
+}
+@media (max-width: 700px) {
+  .mm-header-actions { gap: 10px; }
+  .mm-language-select { width: 88px; height: 30px; padding: 0 3px; font-size: 11px; border-radius: 7px; }
+}
+@media (max-width: 470px) {
+  .main-nav { align-items: center; gap: 7px; }
+  .mm-header-actions { gap: 7px; }
+  .mm-language-select { width: 77px; height: 28px; font-size: 10px; }
+}
+@media (max-width: 360px) {
+  .main-nav { gap: 5px; }
+  .header-inner { gap: 5px; }
+  .mm-language-select { width: 72px; font-size: 9.5px; }
+}
