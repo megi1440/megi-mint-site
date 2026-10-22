@@ -44,6 +44,13 @@ document.documentElement.classList.add("js");
   var historyToday=historyNow.getDate();
   var historyDaysInMonth=new Date(historyYear,historyMonthIndex+1,0).getDate();
   var historyFirstDay=new Date(historyYear,historyMonthIndex,1).getDay();
+  function tr(key,fallback){return window.MEGI_MINT_I18N?window.MEGI_MINT_I18N.t("oneul."+key,fallback):fallback}
+  function trf(key,params,fallback){
+    return tr(key,fallback).replace(/\{(\w+)\}/g,function(match,name){return Object.prototype.hasOwnProperty.call(params,name)?String(params[name]):match});
+  }
+  function dayCount(n){return trf("history.countDays",{n:n},n+"일")}
+  function reportDays(n){return trf("report.days",{n:n},n+"일")}
+  function weekdayName(day,full){return tr("history.weekday."+(full?"full":"short")+"."+day,dayNames[day])}
   var dayNames=["일요일","월요일","화요일","수요일","목요일","금요일","토요일"];
 
   var historySamples=[
@@ -82,36 +89,42 @@ document.documentElement.classList.add("js");
     var stressExp=rec.exp==="-"?"-":clampScore(6-ep);
     var stressAct=rec.act==="-"?"-":clampScore(6-ap);
     if(day===historyToday){energyExp=2;energyAct=4;stressExp=4;stressAct=2}
+    var sampleIndex=(day+historyMonthIndex)%historySamples.length;
+    var sampleKey="history.sample."+sampleIndex+".";
+    var cardDirection=sample.card[3]?"reversed":"upright";
     return{
       c:[rec.exp,rec.act],
       e:[energyExp,energyAct],
       s:[stressExp,stressAct],
-      line:sample.line,
-      msg:sample.msg,
-      tags:sample.tags,
-      difference:sample.difference,
-      card:sample.card
+      line:tr(sampleKey+"line",sample.line),
+      msg:tr(sampleKey+"msg",sample.msg),
+      tags:tr(sampleKey+"tags",sample.tags.join("|")).split("|"),
+      difference:tr(sampleKey+"difference",sample.difference),
+      card:[tr(sampleKey+"card",sample.card[0]),tr("history.direction."+cardDirection,sample.card[1]),sample.card[2],sample.card[3]]
     };
   }
   function historyState(rec){
-    if(rec.exp!=="-"&&rec.act!=="-")return"예상 · 돌아보기";
-    if(rec.exp!=="-")return"예상만 기록";
-    if(rec.act!=="-")return"돌아보기만 기록";
-    return"기록 없음";
+    if(rec.exp!=="-"&&rec.act!=="-")return tr("history.stateBoth","예상 · 돌아보기");
+    if(rec.exp!=="-")return tr("history.predictionOnly","예상만 기록");
+    if(rec.act!=="-")return tr("history.reflectionOnly","돌아보기만 기록");
+    return tr("history.noEntry","기록 없음");
   }
   function historyTip(rec){
-    if(rec.exp!=="-"&&rec.act!=="-")return"예상 "+rec.exp+" → 실제 "+rec.act;
-    if(rec.exp!=="-")return"예상 "+rec.exp+" · 돌아보기 없음";
-    if(rec.act!=="-")return"예상 없음 · 실제 "+rec.act;
-    return"기록 없음";
+    if(rec.exp!=="-"&&rec.act!=="-")return trf("history.tipBoth",{exp:rec.exp,act:rec.act},"예상 {exp} → 실제 {act}");
+    if(rec.exp!=="-")return trf("history.tipPredict",{exp:rec.exp},"예상 {exp} · 돌아보기 없음");
+    if(rec.act!=="-")return trf("history.tipReview",{act:rec.act},"예상 없음 · 실제 {act}");
+    return tr("history.noEntry","기록 없음");
   }
+  function escapeHtml(value){return String(value).replace(/[&<>"]/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[ch]})}
   function renderHistoryCalendar(){
     var cal=document.querySelector(".oc-history-calendar-v4 .oc-history-calendar-grid");
     if(!cal)return;
 
-    setText(".oc-history-month-title",historyYear+"년 "+historyMonth+"월");
-    setText(".oc-history-current-date","오늘 "+historyMonth+"월 "+historyToday+"일");
-    cal.setAttribute("aria-label",historyYear+"년 "+historyMonth+"월 기록 예시");
+    var previous=cal.querySelector("button.is-selected[data-day]");
+    var selectedDay=previous?previous.getAttribute("data-day"):String(historyToday);
+    setText(".oc-history-month-title",trf("history.monthTitle",{year:historyYear,month:historyMonth},"{year}년 {month}월"));
+    setText(".oc-history-current-date",trf("history.todayDate",{month:historyMonth,day:historyToday},"오늘 {month}월 {day}일"));
+    cal.setAttribute("aria-label",trf("history.calendarAria",{year:historyYear,month:historyMonth},"{year}년 {month}월 기록 예시"));
 
     var html="";
     for(var blank=0;blank<historyFirstDay;blank++)html+='<button class="is-empty" type="button" tabindex="-1" aria-hidden="true"></button>';
@@ -129,23 +142,27 @@ document.documentElement.classList.add("js");
       var dots="";
       if(rec.exp!=="-")dots+='<i class="mint"></i>';
       if(rec.act!=="-")dots+='<i class="peach"></i>';
-      var todayMark=day===historyToday?'<span class="oc-history-today-mark">오늘</span>':"";
+      var todayMark=day===historyToday?'<span class="oc-history-today-mark">'+escapeHtml(tr("history.today","오늘"))+'</span>':"";
       html+='<button type="button" class="'+classes.join(" ")+'" data-day="'+day+'" data-exp="'+rec.exp+'" data-act="'+rec.act+'" data-tip="'+historyTip(rec)+'"><b>'+day+'</b>'+todayMark+(dots?'<em>'+dots+'</em>':"")+'</button>';
     }
     cal.innerHTML=html;
 
     var density=Math.round(recordedCount/historyDaysInMonth*100);
-    setText(".oc-history-count-predict",predictCount+"일");
-    setText(".oc-history-count-review",reviewCount+"일");
-    setText(".oc-history-count-both",bothCount+"일");
+    setText(".oc-history-count-predict",dayCount(predictCount));
+    setText(".oc-history-count-review",dayCount(reviewCount));
+    setText(".oc-history-count-both",dayCount(bothCount));
     setText(".oc-history-density-value",density+"%");
     var bar=document.querySelector(".oc-history-density i b");if(bar)bar.style.width=density+"%";
 
     renderHistoryRecent();
     bindHistoryCalendar();
 
-    var selected=cal.querySelector('button[data-day="'+historyToday+'"]')||cal.querySelector("button[data-day]");
-    if(selected)showHistory(selected);
+    var selected=cal.querySelector('button[data-day="'+selectedDay+'"]')||cal.querySelector("button[data-day]");
+    if(selected){
+      cal.querySelectorAll("button.is-selected").forEach(function(x){x.classList.remove("is-selected")});
+      selected.classList.add("is-selected");
+      showHistory(selected);
+    }
   }
   function renderHistoryRecent(){
     var strip=document.querySelector(".oc-history-strip-v4");
@@ -156,7 +173,7 @@ document.documentElement.classList.add("js");
     for(var day=start;day<start+count;day++){
       var rec=calendarRecord(day);
       var delta=(rec.exp!=="-"&&rec.act!=="-")?(+rec.act-+rec.exp):null;
-      var summary=rec.exp!=="-"&&rec.act!=="-"?rec.exp+" → "+rec.act:rec.exp!=="-"?"예상 "+rec.exp:rec.act!=="-"?"실제 "+rec.act:"기록 없음";
+      var summary=rec.exp!=="-"&&rec.act!=="-"?trf("history.recentBoth",{exp:rec.exp,act:rec.act},"{exp} → {act}"):rec.exp!=="-"?trf("history.recentPredict",{exp:rec.exp},"예상 {exp}"):rec.act!=="-"?trf("history.recentReview",{act:rec.act},"실제 {act}"):tr("history.noEntry","기록 없음");
       var deltaText=delta===null?"—":delta>0?"+"+delta:String(delta);
       html+='<button type="button" '+(day===historyToday?'class="is-active" ':'')+'data-history-day="'+day+'"><small>'+historyMonth+'/'+day+'</small><b>'+summary+'</b><em>'+deltaText+'</em></button>';
     }
@@ -190,7 +207,7 @@ document.documentElement.classList.add("js");
     var detail=document.querySelector(".oc-history-detail-v4");
     if(detail){detail.classList.remove("is-refreshing");void detail.offsetWidth;detail.classList.add("is-refreshing")}
 
-    setText(".oc-history-date",historyMonth+"월 "+day+"일 "+dayNames[new Date(historyYear,historyMonthIndex,day).getDay()]);
+    setText(".oc-history-date",trf("history.dateDetail",{month:historyMonth,day:day,weekday:weekdayName(new Date(historyYear,historyMonthIndex,day).getDay(),true)},"{month}월 {day}일 {weekday}"));
     setText(".oc-history-exp",rec.exp);
     setText(".oc-history-act",rec.act);
     setText(".oc-history-state",historyState(rec));
@@ -209,7 +226,7 @@ document.documentElement.classList.add("js");
     setText(".oc-history-stress-exp",d.s[0]);setText(".oc-history-stress-act",d.s[1]);
     setText(".oc-history-line",d.line);
     setText(".oc-history-message-text",d.msg);
-    setText(".oc-history-difference-copy",rec.exp==="-"&&rec.act==="-"?"기록이 없는 날도 달력의 흐름 속에서 자연스럽게 남겨둘 수 있어요.":d.difference);
+    setText(".oc-history-difference-copy",rec.exp==="-"&&rec.act==="-"?tr("history.noRecordDifference","기록이 없는 날도 달력의 흐름 속에서 자연스럽게 남겨둘 수 있어요."):d.difference);
     setText(".oc-history-card-title",d.card[0]);
     setText(".oc-history-card-direction",d.card[1]);
 
@@ -220,7 +237,7 @@ document.documentElement.classList.add("js");
       imgs[2].src=scoreIcon("stress",d.s[1]!=="-"?d.s[1]:d.s[0]);
     }
     var tags=document.querySelector(".oc-history-tags-v4");
-    if(tags)tags.innerHTML=d.tags.map(function(t){return"<span>"+t+"</span>"}).join("");
+    if(tags)tags.innerHTML=d.tags.map(function(t){return"<span>"+escapeHtml(t)+"</span>"}).join("");
 
     var img=document.querySelector(".oc-history-card-image");
     if(img){img.src=d.card[2];img.alt=d.card[0]+" "+d.card[1];img.classList.toggle("is-reversed",!!d.card[3])}
@@ -279,7 +296,7 @@ document.documentElement.classList.add("js");
     var a=document.querySelector(".oc-pattern-line--actual");
     if(p)p.setAttribute("points",patternPoints(data.predict));
     if(a)a.setAttribute("points",patternPoints(data.actual));
-    setText(".oc-chart-summary",data.summary);
+    setText(".oc-chart-summary",trf("report.lastSummary",{exp:data.predict[data.predict.length-1],act:data.actual[data.actual.length-1]},data.summary));
 
     var group=document.querySelector(".oc-pattern-chart-points");
     if(group){
@@ -290,7 +307,7 @@ document.documentElement.classList.add("js");
         var c=document.createElementNS("http://www.w3.org/2000/svg","circle");
         c.setAttribute("cx",x.toFixed(1));c.setAttribute("cy",y.toFixed(1));c.setAttribute("r",i===data.actual.length-1?"6":"4");
         c.setAttribute("fill","#b9795e");
-        c.setAttribute("data-tip","실제 "+v.toFixed(1));
+        c.setAttribute("data-tip",trf("report.chartTip",{value:v.toFixed(1)},"실제 {value}"));
         group.appendChild(c);
       });
     }
@@ -335,22 +352,22 @@ document.documentElement.classList.add("js");
     wrap.innerHTML=vals.map(function(v,i){
       var row=Math.floor(i/5)+1,col=(i%5)+1,op=.10+(v/max*.72);
       var top=v===max?" is-top":"";
-      return '<button type="button" class="'+top+'" style="--o:'+op.toFixed(2)+'" title="예상 '+row+' → 실제 '+col+' · '+v+'회"></button>';
+      return '<button type="button" class="'+top+'" style="--o:'+op.toFixed(2)+'" title="'+escapeHtml(trf("report.habitTip",{exp:row,act:col,count:v},"예상 {exp} → 실제 {act} · {count}회"))+'"></button>';
     }).join("");
   }
   function applyPatternPeriod(days){
     var data=patternPeriods[String(days)]||patternPeriods["30"];
     setText(".oc-period-range",patternRange(+days));
-    setText(".oc-period-predict",data.predict+"일");
-    setText(".oc-period-review",data.review+"일");
-    setText(".oc-period-compare",data.compare+"일");
-    setText(".oc-period-compare-short",data.compare+"일");
-    setText(".oc-flow-up",data.up+"일");
-    setText(".oc-flow-same",data.same+"일");
-    setText(".oc-flow-down",data.down+"일");
+    setText(".oc-period-predict",reportDays(data.predict));
+    setText(".oc-period-review",reportDays(data.review));
+    setText(".oc-period-compare",reportDays(data.compare));
+    setText(".oc-period-compare-short",reportDays(data.compare));
+    setText(".oc-flow-up",reportDays(data.up));
+    setText(".oc-flow-same",reportDays(data.same));
+    setText(".oc-flow-down",reportDays(data.down));
     setText(".oc-density-rate",data.density+"%");
-    setText(".oc-density-days",Math.max(data.predict,data.review)+"일 기록");
-    setText(".oc-pattern-period-badge",days==="180"?"6개월":days==="365"?"1년":days+"일");
+    setText(".oc-density-days",trf("report.recordDays",{n:Math.max(data.predict,data.review)},"{n}일 기록"));
+    setText(".oc-pattern-period-badge",days==="180"?trf("report.months",{n:6},"6개월"):days==="365"?trf("report.years",{n:1},"1년"):reportDays(days));
 
     var total=Math.max(1,data.up+data.same+data.down);
     var up=Math.round(data.up/total*100),same=Math.round(data.same/total*100),down=100-up-same;
@@ -361,7 +378,8 @@ document.documentElement.classList.add("js");
   }
 
   var patternNow=new Date();
-  setText(".oc-surprise-date-text",(patternNow.getMonth()+1)+"월 "+patternNow.getDate()+"일");
+  function renderSurpriseDate(){setText(".oc-surprise-date-text",trf("report.surpriseDate",{month:patternNow.getMonth()+1,day:patternNow.getDate()},"{month}월 {day}일"))}
+  renderSurpriseDate();
   document.querySelectorAll(".oc-period-tabs button").forEach(function(btn){
     btn.addEventListener("click",function(){
       document.querySelectorAll(".oc-period-tabs button").forEach(function(x){x.classList.remove("is-active")});
@@ -387,11 +405,20 @@ document.documentElement.classList.add("js");
   renderHabitMatrix();
   renderPatternChart("condition");
   applyPatternPeriod(30);
+  window.addEventListener("megi:languagechange",function(){
+    renderHistoryCalendar();
+    var selectedMetric=document.querySelector(".oc-pattern-v4 .oc-metric-tabs button.is-active");
+    renderPatternChart(selectedMetric?selectedMetric.getAttribute("data-metric"):"condition");
+    var selectedPeriod=document.querySelector(".oc-period-tabs button.is-active");
+    applyPatternPeriod(selectedPeriod?selectedPeriod.getAttribute("data-period"):"30");
+    renderHabitMatrix();
+    renderSurpriseDate();
+  });
 
   var deck=[
-    {title:"별",direction:"정방향",src:"../img/apps/oneulchai/detail/tarot_major_17_star.webp",keys:["희망","회복","여유"],msg:"멀리 보려 애쓰기보다 지금 마음이 편해지는 작은 방향부터 바라보세요."},
-    {title:"여사제",direction:"정방향",src:"../img/apps/oneulchai/detail/tarot_major_02_high_priestess.webp",keys:["직감","고요","관찰"],msg:"답을 서둘러 정하기보다 지금 마음속에서 반복해서 떠오르는 감각을 잠깐 바라보세요."},
-    {title:"태양",direction:"정방향",src:"../img/apps/oneulchai/detail/tarot_major_19_sun.webp",keys:["밝음","활력","확신"],msg:"오늘은 잘되고 있는 것을 먼저 바라보세요. 작은 확신이 하루의 분위기를 바꿀 수 있어요."}
+    {id:"star",title:"별",direction:"정방향",src:"../img/apps/oneulchai/detail/tarot_major_17_star.webp",keys:["희망","회복","여유"],msg:"멀리 보려 애쓰기보다 지금 마음이 편해지는 작은 방향부터 바라보세요."},
+    {id:"priestess",title:"여사제",direction:"정방향",src:"../img/apps/oneulchai/detail/tarot_major_02_high_priestess.webp",keys:["직감","고요","관찰"],msg:"답을 서둘러 정하기보다 지금 마음속에서 반복해서 떠오르는 감각을 잠깐 바라보세요."},
+    {id:"sun",title:"태양",direction:"정방향",src:"../img/apps/oneulchai/detail/tarot_major_19_sun.webp",keys:["밝음","활력","확신"],msg:"오늘은 잘되고 있는 것을 먼저 바라보세요. 작은 확신이 하루의 분위기를 바꿀 수 있어요."}
   ];
 
   var discoveryBack="../img/apps/oneulchai/detail/tarot_back.webp";
@@ -401,18 +428,30 @@ document.documentElement.classList.add("js");
   var slotToData=[1,0,2];
   var discoveryRevealed=[false,false,false];
 
+  function localizedDiscoveryCard(data){
+    var key="discover.card."+data.id;
+    return {
+      title:tr(key+".title",data.title),
+      direction:tr("history.direction.upright","정방향"),
+      src:data.src,
+      keys:data.keys.map(function(value,index){return tr(key+".keyword"+index,value)}),
+      msg:tr(key+".message",data.msg)
+    };
+  }
+
   function syncDiscoveryPhone(data){
+    data=localizedDiscoveryCard(data);
     var img=document.querySelector(".oc-phone-card-image");
     if(img){
       img.src=data.src;
-      img.alt=data.title+" 정방향";
+      img.alt=data.title+" · "+data.direction;
       img.classList.remove("is-reversed");
     }
     setText(".oc-phone-card-title",data.title);
-    setText(".oc-phone-card-direction","정방향");
+    setText(".oc-phone-card-direction",data.direction);
 
     var keys=document.querySelector(".oc-phone-keywords");
-    if(keys)keys.innerHTML=data.keys.map(function(k){return "<span>"+k+"</span>"}).join("");
+    if(keys)keys.innerHTML=data.keys.map(function(k){return "<span>"+escapeHtml(k)+"</span>"}).join("");
 
     var msg=document.querySelector(".oc-phone-message p");
     if(msg)msg.textContent=data.msg;
@@ -427,9 +466,9 @@ document.documentElement.classList.add("js");
     drawBtn.classList.toggle("is-complete",allOpen);
 
     if(allOpen){
-      drawBtn.innerHTML='세 장 모두 만나봤어요 <span>✓</span>';
+      drawBtn.innerHTML=escapeHtml(tr("discover.drawComplete","세 장 모두 만나봤어요"))+' <span>✓</span>';
     }else{
-      drawBtn.innerHTML='오늘의 카드 뽑아보기 <span>✦</span>';
+      drawBtn.innerHTML=escapeHtml(tr("discover.drawAction","오늘의 카드 뽑아보기"))+' <span>✦</span>';
     }
   }
 
@@ -530,7 +569,11 @@ document.documentElement.classList.add("js");
   var archiveSuitCards=[].slice.call(document.querySelectorAll(".oc-suit-card"));
 
   function applyArchiveFilter(filter){
-    var labels={all:"전체 카드",found:"발견한 카드",missing:"아직 만나지 못한 카드"};
+    var labels={
+      all:tr("discover.filter.allLabel","전체 카드"),
+      found:tr("discover.filter.foundLabel","발견한 카드"),
+      missing:tr("discover.filter.missingLabel","아직 만나지 못한 카드")
+    };
     setText(".oc-archive-v5-filter-label",labels[filter]||labels.all);
 
     archiveSuitCards.forEach(function(card){
@@ -563,6 +606,26 @@ document.documentElement.classList.add("js");
       btn.classList.add("is-active");
       applyArchiveFilter(btn.getAttribute("data-archive-filter"));
     });
+  });
+
+  window.addEventListener("megi:languagechange",function(){
+    // Keep the currently displayed tarot card and already revealed slots.
+    var current=document.querySelector(".oc-discovery-v4-deck .oc-draw-card.is-current");
+    var currentSlot=current?discoveryCards.indexOf(current):-1;
+    syncDiscoveryPhone(deck[currentSlot>=0?slotToData[currentSlot]:0]);
+    discoveryCards.forEach(function(card,slot){
+      var img=card.querySelector("img");
+      if(!img)return;
+      if(discoveryRevealed[slot]){
+        var chosen=localizedDiscoveryCard(deck[slotToData[slot]]);
+        img.alt=chosen.title+" · "+chosen.direction;
+      }else{
+        img.alt=tr("discover.slot"+slot+".back",img.alt);
+      }
+    });
+    updateDiscoveryButton();
+    var activeFilter=document.querySelector("[data-archive-filter].is-active");
+    applyArchiveFilter(activeFilter?activeFilter.getAttribute("data-archive-filter"):"all");
   });
 
   document.querySelectorAll(".oc-toggle[data-reminder]").forEach(function(toggle){toggle.addEventListener("click",function(){toggle.classList.toggle("is-on");var key=toggle.getAttribute("data-reminder"),pill=document.querySelector('[data-reminder-pill="'+key+'"]'),row=toggle.closest(".oc-reminder-row"),time=row?row.nextElementSibling:null,off=!toggle.classList.contains("is-on");if(pill)pill.classList.toggle("is-off",off);if(row)row.classList.toggle("is-off",off);if(time&&time.classList.contains("oc-reminder-time"))time.classList.toggle("is-off",off)})});

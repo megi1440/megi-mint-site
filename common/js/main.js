@@ -37,6 +37,20 @@ document.documentElement.classList.add("js");
     return window.MEGI_MINT_I18N ? window.MEGI_MINT_I18N.getLanguage() : "en";
   }
 
+  // 앱 상세/개인정보처리방침에 현재 언어를 명시적으로 전달한다.
+  // localStorage를 사용할 수 없는 인앱 브라우저에서도 선택 언어가 유지된다.
+  function withLanguage(url, lang) {
+    if (!url) return "";
+    var hashIndex = url.indexOf("#");
+    var hash = hashIndex < 0 ? "" : url.slice(hashIndex);
+    var base = hashIndex < 0 ? url : url.slice(0, hashIndex);
+    var queryIndex = base.indexOf("?");
+    var path = queryIndex < 0 ? base : base.slice(0, queryIndex);
+    var params = new URLSearchParams(queryIndex < 0 ? "" : base.slice(queryIndex + 1));
+    params.set("lang", lang || "en");
+    return path + "?" + params.toString() + hash;
+  }
+
   function t(key, fallback) {
     return window.MEGI_MINT_I18N ? window.MEGI_MINT_I18N.t(key, fallback) : fallback;
   }
@@ -86,7 +100,7 @@ document.documentElement.classList.add("js");
 
       if (grid) {
         var privacyLink = app.privacyUrl
-          ? '<a href="' + escapeHtml(app.privacyUrl) + '" class="text-link">' + escapeHtml(t("home.apps.linkPrivacy", "Privacy policy")) + '</a>'
+          ? '<a href="' + escapeHtml(withLanguage(app.privacyUrl, lang)) + '" class="text-link">' + escapeHtml(t("home.apps.linkPrivacy", "Privacy policy")) + '</a>'
           : "";
         var article = document.createElement("article");
         article.className = "app-card";
@@ -105,7 +119,7 @@ document.documentElement.classList.add("js");
             '<p class="app-description">' + escapeHtml(display.description || "") + '</p>' +
           '</div>' +
           '<div class="app-actions">' +
-            '<a href="' + escapeHtml(app.appUrl) + '" class="app-link">' + escapeHtml(t("home.apps.linkDetail", "View app")) + ' <span aria-hidden="true">↗</span></a>' +
+            '<a href="' + escapeHtml(withLanguage(app.appUrl, lang)) + '" class="app-link">' + escapeHtml(t("home.apps.linkDetail", "View app")) + ' <span aria-hidden="true">↗</span></a>' +
             privacyLink +
           '</div>';
         grid.appendChild(article);
@@ -114,7 +128,7 @@ document.documentElement.classList.add("js");
       if (mobileList) {
         var row = document.createElement("a");
         row.className = "mobile-app-row";
-        row.href = app.appUrl;
+        row.href = withLanguage(app.appUrl, lang);
         row.dataset.appId = app.id || "";
         applyAppAccent(row, app, index);
         row.setAttribute("aria-label", formatMessage("home.apps.mobileLabel", { name: name }, "View {name} details"));

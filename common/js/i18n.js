@@ -43,6 +43,8 @@
       ["data-i18n", "textContent"],
       ["data-i18n-aria-label", "aria-label"],
       ["data-i18n-title", "title"],
+      ["data-i18n-alt", "alt"],
+      ["data-i18n-content", "content"],
       ["data-i18n-placeholder", "placeholder"]
     ];
     rules.forEach(function (rule) {
